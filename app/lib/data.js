@@ -106,7 +106,7 @@ export const projects = [
     title: "Solex - Innovative Footwear Brand",
     description: "Designed and developed a highly responsive e-commerce website for 'Solex', a footwear brand, using React and Tailwind CSS. The platform is engineered to elegantly showcase the latest arrivals and provide a seamless browsing experience for customers.",
     githubLink: "https://github.com/SharonLawal/Solex",
-    liveLink: "https://solex-phzuts299-sharon-lawals-projects.vercel.app/",
+    liveLink: "https://solex1.netlify.app/",
     image: "/assets/images/solex.png",
     languagesUsed: ["React", "Tailwind CSS", "JavaScript"]
   },
