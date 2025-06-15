@@ -3,17 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
-import { projects } from '../lib/data'; // Import projects from data.js
+import { projects } from '../lib/data';
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate data loading if projects were fetched from an API
-    // Since projects are static, we can just set loading to false after a small delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500); // Simulate a small loading delay
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -51,41 +49,40 @@ const Projects = () => {
           Projects
         </motion.h1>
 
-        <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3"> {/* Increased gap */}
+        <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
               className="bg-dark-secondary rounded-lg shadow-md overflow-hidden flex flex-col justify-between
-                         border-2 border-dark-tertiary group // Added group for hover effects
-                         hover:border-accent-green hover:shadow-xl hover:scale-[1.02] hover:-translate-y-2 // Added hover effects
-                         transition-all duration-300" // Smooth transition
+                         border-2 border-dark-tertiary group
+                         hover:border-accent-green hover:shadow-xl hover:scale-[1.02] hover:-translate-y-2
+                         transition-all duration-300"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 * index }} // Staggered animation
+              transition={{ duration: 0.5, delay: 0.1 * index }}
               style={{ height: '100%' }}
             >
-              {project.image && ( // Changed from imageUrl to image
+              {project.image && (
                 <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden bg-dark-tertiary flex items-center justify-center">
                   <Image
-                    src={project.image}// Prepend '/' to construct public path
+                    src={project.image}
                     alt={project.title}
-                    fill // Fills the parent div
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500" // Image zoom on hover
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Optimize image loading
-                    quality={75} // Image quality
-                    onError={(e) => { e.target.src = "/assets/images/il.png"; e.target.alt = "Image not found"; }} // Fallback to public path
+                    fill
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={75}
+                    onError={(e) => { e.target.src = "/assets/images/il.png"; e.target.alt = "Image not found"; }}
                   />
                 </div>
               )}
               <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-semibold text-accent-green text-center mb-3">{project.title}</h3>
-                {/* Changed description rendering to a single paragraph */}
-                <p className="text-text-muted mb-4 px-2 text-left leading-relaxed">
+                <p className="text-text-muted mb-4 px-2 text-center leading-relaxed">
                   {project.description}
                 </p>
 
                 {project.languagesUsed && project.languagesUsed.length > 0 && (
-                  <div className="mt-auto pt-4 border-t border-accent-green-dark"> {/* Added top border for separation */}
+                  <div className="mt-auto pt-4 border-t border-accent-green-dark">
                     <p className="text-sm font-semibold text-text-light mb-2 text-center">Languages/Technologies Used:</p>
                     <div className="flex flex-wrap justify-center gap-2 text-sm text-text-light">
                       {project.languagesUsed.map((lang, i) => (
@@ -97,7 +94,7 @@ const Projects = () => {
                   </div>
                 )}
               </div>
-              <div className="p-6 flex justify-around items-center border-t border-accent-green-light"> {/* Border top */}
+              <div className="p-6 flex justify-around items-center border-t border-accent-green-light">
                 <a
                   href={project.githubLink}
                   className="text-accent-green hover:text-accent-green-dark transition duration-300 flex items-center space-x-2"

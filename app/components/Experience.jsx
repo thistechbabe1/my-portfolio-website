@@ -1,7 +1,7 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { experiences } from '../lib/data';
+"use client";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { experiences } from "../lib/data";
 
 const Experience = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,10 @@ const Experience = () => {
 
   if (isLoading) {
     return (
-      <section id="experience" className="py-16 bg-transparent relative text-center text-text-light min-h-[400px] flex items-center justify-center">
+      <section
+        id="experience"
+        className="py-16 bg-transparent relative text-center text-text-light min-h-[400px] flex items-center justify-center"
+      >
         <div className="flex items-center justify-center space-x-2">
           <div className="w-4 h-4 rounded-full bg-accent-green animate-bounce delay-75"></div>
           <div className="w-4 h-4 rounded-full bg-accent-purple animate-bounce delay-150"></div>
@@ -51,7 +54,12 @@ const Experience = () => {
 
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <div key={index} className={`flex items-center w-full relative flex-col ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+              <div
+                key={index}
+                className={`flex items-center w-full relative flex-col ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : "md:flex-row"
+                }`}
+              >
                 <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 bg-accent-green w-4 h-4 rounded-full z-10 md:top-1/2 md:-translate-y-1/2 border-2 border-dark-primary"></div>
 
                 <motion.div
@@ -61,9 +69,15 @@ const Experience = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  <h2 className="text-2xl font-semibold text-text-light mb-2">{exp.title}</h2>
-                  <p className="text-xl text-accent-green mb-2">{exp.company}</p>
-                  <p className="text-md text-text-muted mb-4">{exp.location} | {exp.duration}</p>
+                  <h2 className="text-2xl font-semibold text-text-light mb-2">
+                    {exp.title}
+                  </h2>
+                  <p className="text-xl text-accent-green mb-2">
+                    {exp.company}
+                  </p>
+                  <p className="text-md text-text-muted mb-4">
+                    {exp.location} | {exp.duration}
+                  </p>
                   <ul className="list-disc list-inside space-y-2 text-text-light">
                     {exp.description.map((point, i) => (
                       <li key={i}>{point}</li>

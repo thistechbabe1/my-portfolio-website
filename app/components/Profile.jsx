@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import profilePic from '../assets/ProfilePic1.jpg';
-const AnimatedBackground = dynamic(() => import('./AnimatedBackground'), { ssr: false });
+// const AnimatedBackground = dynamic(() => import('./AnimatedBackground'), { ssr: false });
+import AnimatedBackground from './AnimatedBackground';
 
 const roles = ["Software Engineer", "Full Stack Web Developer", "Problem Solver"];
 const TYPING_SPEED = 150;

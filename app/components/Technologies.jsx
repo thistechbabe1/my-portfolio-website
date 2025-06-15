@@ -18,12 +18,12 @@ const Technologies = () => {
               <motion.div
                 key={itemIndex}
                 className="flex flex-col items-center p-5 bg-dark-tertiary rounded-lg shadow-md
-                           border border-dark-secondary // Base border
-                           hover:border-accent-green hover:shadow-lg hover:-translate-y-2 hover:scale-[1.02] // Hover effects
-                           transition-all duration-300 cursor-pointer" // Smooth transition and pointer cursor
+                           border border-dark-secondary
+                           hover:border-accent-green hover:shadow-lg hover:-translate-y-2 hover:scale-[1.02]
+                           transition-all duration-300 cursor-pointer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: itemIndex * 0.05 }} // Staggered animation
+                transition={{ delay: itemIndex * 0.05 }}
               >
                 <div className="text-5xl text-accent-green mb-3">
                   {tech.icon}
