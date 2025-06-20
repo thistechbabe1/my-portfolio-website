@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaPaperPlane } from 'react-icons/fa';
-import Illustration from '../assets/il.png';
+import Illustration from '../assets/Illustration.png';
 
 const Contact = () => {
   const [name, setName] = useState('');

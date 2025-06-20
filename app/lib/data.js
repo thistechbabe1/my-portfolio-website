@@ -124,7 +124,7 @@ export const projects = [
     githubLink: "https://github.com/Shadowdevsbu/kuda-clone",
     liveLink: "https://kuda-clone-9bzr.vercel.app/",
     image: "/assets/images/kuda-clone.png",
-    languagesUsed: ["React", "Tailwind CSS", "Node.js", "Express", "JavaScript"]
+    languagesUsed: ["ReactJS", "Tailwind CSS", "Node.js", "Express", "JavaScript"]
   },
   {
     title: "Portfolio Website",
@@ -132,6 +132,6 @@ export const projects = [
     githubLink: "https://github.com/SharonLawal/my-portfolio-website",
     liveLink: "https://sharonlawal.me/",
     image: "/assets/images/portfolio.png",
-    languagesUsed: ["Next.js", "React", "Tailwind CSS", "JavaScript"]
+    languagesUsed: ["Next.js", "ReactJS", "Tailwind CSS", "JavaScript"]
   }
 ];

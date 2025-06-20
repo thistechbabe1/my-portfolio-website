@@ -3,8 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import profilePic from '../assets/ProfilePic1.jpg';
-// const AnimatedBackground = dynamic(() => import('./AnimatedBackground'), { ssr: false });
+import profilePic from '../assets/ProfilePic.jpg';
 import AnimatedBackground from './AnimatedBackground';
 
 const roles = ["Software Engineer", "Full Stack Web Developer", "Problem Solver"];
@@ -89,7 +88,7 @@ const Profile = () => {
             </motion.h1>
           </div>
           <motion.a
-            href="YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE"
+            href="https://drive.google.com/file/d/1Ng3MB8Ia8tmIrB_mE9AWowZUR15M5wrz/view?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 px-8 py-3 bg-accent-green text-dark-primary font-semibold rounded-lg shadow-lg
