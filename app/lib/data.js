@@ -103,6 +103,14 @@ export const experiences = [
 
 export const projects = [
   {
+    title: "DevJournal - Developer's Journal",
+    description: "A comprehensive web application designed for developers to document their coding journey, share insights, and track progress. The platform features user authentication, a rich text editor for journal entries, and a responsive design for seamless access across devices.",
+    githubLink: "https://github.com/SharonLawal/DevJournal",
+    liveLink: "https://devjournaal.netlify.app/",
+    image: "/assets/images/journal.png",
+    languagesUsed: ["AngularJS", "Bootstrap", "JavaScript", "NodeJS", "Express", "MongoDB"]
+  },
+  {
     title: "Solex - Innovative Footwear Brand",
     description: "Designed and developed a highly responsive e-commerce website for 'Solex', a footwear brand, using React and Tailwind CSS. The platform is engineered to elegantly showcase the latest arrivals and provide a seamless browsing experience for customers.",
     githubLink: "https://github.com/SharonLawal/Solex",
