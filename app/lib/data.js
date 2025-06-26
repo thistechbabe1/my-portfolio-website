@@ -104,7 +104,7 @@ export const experiences = [
 export const projects = [
   {
     title: "DevJournal - Developer's Journal",
-    description: "A comprehensive web application designed for developers to document their coding journey, share insights, and track progress. The platform features user authentication, a rich text editor for journal entries, and a responsive design for seamless access across devices.",
+    description: "A full stack web application designed for developers to document their coding journey, share insights, and track progress. The platform features user authentication, a rich text editor for journal entries, and a responsive design for seamless access across devices.",
     githubLink: "https://github.com/SharonLawal/DevJournal",
     liveLink: "https://devjournaal.netlify.app/",
     image: "/assets/images/journal.png",
