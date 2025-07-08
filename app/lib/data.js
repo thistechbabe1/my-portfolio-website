@@ -138,7 +138,7 @@ export const projects = [
     title: "Portfolio Website",
     description: "My personal portfolio website, meticulously designed and developed to comprehensively showcase my diverse technical skills and professional projects. Features a modern, responsive design with dynamic animations and an intuitive UI.",
     githubLink: "https://github.com/SharonLawal/my-portfolio-website",
-    liveLink: "https://sharonlawal.me/",
+    liveLink: "https://sharonlawal.tech/",
     image: "/assets/images/portfolio.png",
     languagesUsed: ["Next.js", "ReactJS", "Tailwind CSS", "JavaScript"]
   }
