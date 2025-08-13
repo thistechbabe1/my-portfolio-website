@@ -1,10 +1,8 @@
 import React from 'react';
-import { FaJsSquare, FaPython, FaReact, FaAngular, FaHtml5, FaCss3Alt, FaAws, FaGithub, FaMobileAlt, FaCodeBranch, FaTools, FaGitAlt } from 'react-icons/fa';
-import { SiNotion, SiTrello, SiTypescript, SiNextdotjs, SiNodedotjs, SiMongodb, SiMysql, SiMicrosoftazure, SiTailwindcss, SiBootstrap, SiGitlab, SiAnaconda, SiJupyter, SiFirebase, SiSupabase } from 'react-icons/si';
+import { FaJsSquare, FaReact, FaAngular, FaHtml5, FaCss3Alt, FaAws, FaGithub, FaMobileAlt, FaCodeBranch, FaTools, FaGitAlt } from 'react-icons/fa';
+import { SiNotion, SiTrello, SiTypescript, SiNextdotjs, SiNodedotjs, SiMongodb, SiMicrosoftazure, SiTailwindcss, SiBootstrap, SiGitlab, SiFirebase, SiSupabase } from 'react-icons/si';
 import { MdApi } from 'react-icons/md';
-import { BiMicrochip } from 'react-icons/bi';
-import { AiOutlineDeploymentUnit } from 'react-icons/ai';
-import { VscVscode } from 'react-icons/vscode';
+import { VscVscode } from 'react-icons/vsc';
 
 export const technologiesCategories = [
   {
@@ -101,7 +99,7 @@ export const projects = [
     githubLink: "https://github.com/Shadowdevsbu/kuda-clone",
     liveLink: "https://kuda-clone-9bzr.vercel.app/",
     image: "/assets/images/kuda-clone.png",
-    languagesUsed: ["React", "Tailwind CSS", "Node.js", "Express", "JavaScript", "Supabase"]
+    languagesUsed: ["React", "Tailwind CSS", "Node.js", "Express", "JavaScript"]
   },
   {
     title: "DevJournal - Developer's Journal",
