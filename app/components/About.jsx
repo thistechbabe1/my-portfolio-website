@@ -34,7 +34,7 @@ const About = () => {
               <div>
                 <h3 className="text-2xl font-semibold">Education</h3>
                 <p className="text-text-muted">B.Sc. Software Engineering</p>
-                <p className="text-text-muted">Babcock University (Expected July 2026)</p>
+                <p className="text-text-muted">Babcock University (Expected Graduation in 2026)</p>
               </div>
             </div>
 
