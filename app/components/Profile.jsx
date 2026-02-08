@@ -88,7 +88,7 @@ const Profile = () => {
             </motion.h1>
           </div>
           <motion.a
-            href="https://drive.google.com/file/d/15uWMJ9PurGkfzsOeD07snh1RnOecUnb9/view?usp=sharing"
+            href="https://drive.google.com/file/d/1hKR68w1arV4m9n6NZxuXy7q8BiAfeVVZ/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 px-8 py-3 bg-accent-green text-dark-primary font-semibold rounded-lg shadow-lg
