@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,27 +9,64 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'dark-primary': '#0F0F0F', 
-        'dark-secondary': '#1A1A1A', 
-        'dark-tertiary': '#262626',
+        // Dark mode surfaces
+        'dark-primary':    '#0D0D0D',
+        'dark-secondary':  '#161616',
+        'dark-tertiary':   '#1F1F1F',
 
-        'accent-green': '#00FF80',
-        'accent-green-light': '#33FF99',
-        'accent-green-dark': '#00CC66',
-        'accent-purple': '#BE29EC',
-        'accent-purple-light': '#D665FF',
-        'accent-purple-dark': '#9900CC',
+        // Light mode surfaces
+        'light-primary':   '#F9F8F6',
+        'light-secondary': '#F1EFE9',
+        'light-tertiary':  '#E8E4DB',
 
-        'accent-blue': '#00BFFF', 
-        'accent-orange': '#FF8C00',
+        // Gold accent (champagne)
+        'gold':            '#C9A84C',
+        'gold-light':      '#DFC070',
+        'gold-dark':       '#A8852F',
+        'gold-subtle':     'rgba(201,168,76,0.12)',
 
-        'text-light': '#E0E0E0', 
-        'text-muted': '#A0A0A0',
+        // Text
+        'text-dark':       '#0D0D0D',
+        'text-light':      '#F0EDE8',
+        'text-muted-dark': '#6B6B6B',
+        'text-muted-light':'#A09880',
+
+        // Legacy (keep for compatibility during migration)
+        'accent-green':       '#C9A84C',
+        'accent-green-light': '#DFC070',
+        'accent-green-dark':  '#A8852F',
+        'accent-purple':      '#BE29EC',
+        'text-muted':         '#A09880',
+      },
+      fontFamily: {
+        'display': ['Cormorant Garamond', 'Georgia', 'serif'],
+        'sans':    ['Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'fade-up': 'fadeUp 0.8s ease-out forwards',
+        'cursor-blink': 'cursorBlink 1.1s step-end infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%':   { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeUp: {
+          '0%':   { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        cursorBlink: {
+          '0%, 100%': { opacity: '1' },
+          '50%':       { opacity: '0' },
+        },
+      },
+      transitionDuration: {
+        '400': '400ms',
       },
     },
   },

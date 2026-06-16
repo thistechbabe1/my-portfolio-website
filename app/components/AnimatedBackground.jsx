@@ -1,57 +1,50 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
 
-import { FaReact, FaNodeJs, FaPython, FaJsSquare, FaJava, FaHtml5, FaCss3Alt, FaGitAlt, FaAws } from 'react-icons/fa';
-import { SiTailwindcss, SiNextdotjs, SiMongodb, SiDocker, SiMicrosoftazure, SiDjango, SiSpringboot } from 'react-icons/si';
-
-const backgroundIcons = [
-  { icon: <FaReact />, color: 'text-accent-green' },
-  { icon: <FaNodeJs />, color: 'text-accent-purple' },
-  { icon: <FaPython />, color: 'text-accent-green-light' },
-  { icon: <FaJsSquare />, color: 'text-accent-purple-light' },
-  { icon: <FaHtml5 />, color: 'text-accent-green' },
-  { icon: <FaCss3Alt />, color: 'text-accent-purple' },
-  { icon: <FaGitAlt />, color: 'text-accent-green-light' },
-  { icon: <SiTailwindcss />, color: 'text-accent-purple-light' },
-  { icon: <SiNextdotjs />, color: 'text-accent-green' },
-  { icon: <SiMongodb />, color: 'text-accent-purple' },
-];
-
+/**
+ * Subtle animated gradient mesh that respects dark/light theme.
+ * Replaces the previous particle canvas — far lighter, no JS overhead.
+ */
 const AnimatedBackground = () => {
   return (
-    <div className="absolute inset-0 z-0 opacity-30 overflow-hidden">
-      {backgroundIcons.map((item, index) => (
-        item.icon && React.isValidElement(item.icon) ? (
-          <motion.div
-            key={index}
-            className={`absolute ${item.color}`}
-            initial={{
-              x: `${Math.random() * 100}vw`,
-              y: `${Math.random() * 100}vh`,
-              opacity: 0,
-              scale: Math.random() * 0.5 + 0.5,
-            }}
-            animate={{
-              y: [`${Math.random() * 100}vh`, `${Math.random() * 100}vh`, `${Math.random() * 100}vh`],
-              x: [`${Math.random() * 100}vw`, `${Math.random() * 100}vw`, `${Math.random() * 100}vw`],
-              opacity: [0.4, 0.7, 0.4],
-              scale: [Math.random() * 0.5 + 0.5, Math.random() * 0.5 + 0.5, Math.random() * 0.5 + 0.5],
-            }}
-            transition={{
-              duration: Math.random() * 30 + 30,
-              ease: "linear",
-              repeat: Infinity,
-              delay: Math.random() * 10,
-            }}
-            style={{ fontSize: `${Math.random() * 50 + 30}px` }}
-          >
-            {item.icon}
-          </motion.div>
-        ) : (
-          null
-        )
-      ))}
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    >
+      {/* Primary orb — top left */}
+      <div
+        className="absolute rounded-full opacity-[0.07] dark:opacity-[0.05]"
+        style={{
+          width: '600px',
+          height: '600px',
+          top: '-120px',
+          left: '-180px',
+          background: 'radial-gradient(circle, #C9A84C 0%, transparent 70%)',
+          animation: 'drift1 18s ease-in-out infinite alternate',
+        }}
+      />
+      {/* Secondary orb — bottom right */}
+      <div
+        className="absolute rounded-full opacity-[0.05] dark:opacity-[0.04]"
+        style={{
+          width: '500px',
+          height: '500px',
+          bottom: '-100px',
+          right: '-120px',
+          background: 'radial-gradient(circle, #C9A84C 0%, transparent 70%)',
+          animation: 'drift2 22s ease-in-out infinite alternate',
+        }}
+      />
+      <style>{`
+        @keyframes drift1 {
+          from { transform: translate(0,   0)   scale(1);    }
+          to   { transform: translate(40px, 30px) scale(1.06); }
+        }
+        @keyframes drift2 {
+          from { transform: translate(0,   0)    scale(1);    }
+          to   { transform: translate(-30px, -20px) scale(1.08); }
+        }
+      `}</style>
     </div>
   );
 };

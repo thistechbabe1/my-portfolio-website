@@ -1,120 +1,147 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { projects } from '../lib/data';
 
+const fadeUp = {
+  hidden:  { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
+
 const Projects = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <section id="projects" className="py-12 bg-transparent text-center text-text-light min-h-[400px] flex items-center justify-center">
-        <div className="flex items-center justify-center space-x-2">
-          <div className="w-4 h-4 rounded-full bg-accent-green animate-bounce delay-75"></div>
-          <div className="w-4 h-4 rounded-full bg-accent-purple animate-bounce delay-150"></div>
-          <div className="w-4 h-4 rounded-full bg-accent-green-light animate-bounce delay-225"></div>
-          <p className="ml-4 text-xl">Loading projects...</p>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="projects" className="py-12 bg-transparent">
-      <div className="container mx-auto px-6">
-        <motion.p
-          className="text-lg font-medium text-accent-green text-center"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Browse My Recent
-        </motion.p>
+    <section id="projects" className="py-24 theme-bg theme-text">
+      <div className="max-w-6xl mx-auto px-6">
 
-        <motion.h1
-          className="text-4xl font-bold text-text-light text-center mt-2"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        {/* Header */}
+        <motion.div
+          className="mb-14"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
-          Projects
-        </motion.h1>
+          <span className="section-divider mb-6" />
+          <p
+            className="text-xs tracking-[0.22em] uppercase mb-3 font-medium"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Selected Work
+          </p>
+          <h2
+            className="font-display leading-tight"
+            style={{ fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', fontWeight: 500, color: 'var(--text)' }}
+          >
+            Projects
+          </h2>
+        </motion.div>
 
-        <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.article
               key={index}
-              className="bg-dark-secondary rounded-lg shadow-md overflow-hidden flex flex-col justify-between
-                         border-2 border-dark-tertiary group
-                         hover:border-accent-green hover:shadow-xl hover:scale-[1.02] hover:-translate-y-2
-                         transition-all duration-300"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              style={{ height: '100%' }}
+              className="card flex flex-col overflow-hidden group"
+              style={{ borderRadius: 0 }}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: index * 0.08 }}
             >
+              {/* Image */}
               {project.image && (
-                <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden bg-dark-tertiary flex items-center justify-center">
+                <div className="relative w-full h-48 overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)' }}>
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     quality={75}
-                    onError={(e) => { e.target.src = "/assets/images/il.png"; e.target.alt = "Image not found"; }}
+                    onError={(e) => { e.target.src = '/assets/images/il.png'; }}
                   />
+                  {/* Year badge */}
+                  <span
+                    className="absolute top-3 right-3 text-xs px-2 py-1"
+                    style={{
+                      background: 'var(--bg)',
+                      color: 'var(--text-faint)',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {project.year}
+                  </span>
                 </div>
               )}
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-semibold text-accent-green text-center mb-3">{project.title}</h3>
-                <p className="text-text-muted mb-4 px-2 text-center leading-relaxed">
+
+              {/* Body */}
+              <div className="p-6 flex flex-col flex-grow">
+                <p
+                  className="text-xs tracking-[0.14em] uppercase mb-1.5"
+                  style={{ color: 'var(--gold)', letterSpacing: '0.1em' }}
+                >
+                  {project.subtitle}
+                </p>
+                <h3
+                  className="font-display text-xl mb-3"
+                  style={{ fontWeight: 500, color: 'var(--text)' }}
+                >
+                  {project.title}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed flex-grow"
+                  style={{ color: 'var(--text-muted)' }}
+                >
                   {project.description}
                 </p>
 
-                {project.languagesUsed && project.languagesUsed.length > 0 && (
-                  <div className="mt-auto pt-4 border-t border-accent-green-dark">
-                    <p className="text-sm font-semibold text-text-light mb-2 text-center">Languages/Technologies Used:</p>
-                    <div className="flex flex-wrap justify-center gap-2 text-sm text-text-light">
-                      {project.languagesUsed.map((lang, i) => (
-                        <span key={i} className="bg-dark-tertiary px-3 py-1 rounded-full border border-dark-secondary">
-                          {lang}
-                        </span>
-                      ))}
-                    </div>
+                {/* Tags */}
+                {project.tags && project.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2.5 py-1"
+                        style={{
+                          border: '1px solid var(--border)',
+                          color: 'var(--text-faint)',
+                          letterSpacing: '0.04em',
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 )}
+
+                {/* Links */}
+                <div className="flex gap-5 mt-5 pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs tracking-wider uppercase link-underline transition-colors duration-300 font-medium"
+                    style={{ color: 'var(--text-muted)', letterSpacing: '0.1em' }}
+                  >
+                    <FaGithub size={13} />
+                    GitHub
+                  </a>
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs tracking-wider uppercase link-underline transition-colors duration-300 font-medium"
+                    style={{ color: 'var(--gold)', letterSpacing: '0.1em' }}
+                  >
+                    <FaExternalLinkAlt size={11} />
+                    Live Demo
+                  </a>
+                </div>
               </div>
-              <div className="p-6 flex justify-around items-center border-t border-accent-green-light">
-                <a
-                  href={project.githubLink}
-                  className="text-accent-green hover:text-accent-green-dark transition duration-300 flex items-center space-x-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub size={20} />
-                  <span>GitHub</span>
-                </a>
-                <a
-                  href={project.liveLink}
-                  className="text-accent-green hover:text-accent-green-dark transition duration-300 flex items-center space-x-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaExternalLinkAlt size={20} />
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
