@@ -1,21 +1,16 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { siteConfig, skills, stats } from '../lib/data';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const skills = [
-  'JavaScript', 'TypeScript', 'React', 'Angular', 'Next.js',
-  'Node.js', 'REST APIs', 'MongoDB', 'Firebase', 'Tailwind CSS',
-  'Git / GitHub / GitLab', 'Agile', 'Project Management',
-];
-
 const About = () => {
   return (
-    <section id="about" className="py-24 theme-bg theme-text">
+    <section id="about" className="py-24 theme-text">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}
@@ -28,7 +23,7 @@ const About = () => {
         >
           <span className="section-divider mb-6" />
           <p
-            className="text-xs tracking-[0.22em] uppercase mb-3 font-medium"
+            className="text-xs tracking-[0.14em] uppercase mb-3 font-medium"
             style={{ color: 'var(--text-muted)' }}
           >
             Get to know me
@@ -51,43 +46,11 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
             className="space-y-5"
           >
-            <p className="text-base leading-[1.85]" style={{ color: 'var(--text-muted)' }}>
-              I&apos;m <strong className="font-medium" style={{ color: 'var(--text)' }}>Sharon Lawal</strong>, a final-year
-              Software Engineering student at Babcock University (expected July 2026), with hands-on
-              frontend engineering experience at Remita Payment Services Limited.
-            </p>
-            <p className="text-base leading-[1.85]" style={{ color: 'var(--text-muted)' }}>
-              Proficient in <span style={{ color: 'var(--gold)' }}>Angular, React, and TypeScript</span>, I
-              specialise in building clean, responsive interfaces and integrating backend systems.
-              I bring a complementary background in <span style={{ color: 'var(--gold)' }}>operations and project management</span>,
-              demonstrated through leading cross-functional teams for large-scale technical events.
-            </p>
-            <p className="text-base leading-[1.85]" style={{ color: 'var(--text-muted)' }}>
-              I&apos;m seeking graduate opportunities at the intersection of software engineering and
-              technical leadership — where I can build both great products and great teams.
-            </p>
-
-            {/* Education block */}
-            <div
-              className="mt-8 pt-8 border-t"
-              style={{ borderColor: 'var(--border)' }}
-            >
-              <p
-                className="text-xs tracking-[0.18em] uppercase mb-3 font-medium"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                Education
+            {siteConfig.bio.map((para, idx) => (
+              <p key={idx} className="text-base leading-[1.85]" style={{ color: 'var(--text-muted)' }}>
+                {para}
               </p>
-              <p className="font-display text-xl" style={{ fontWeight: 500 }}>
-                B.Sc. Software Engineering
-              </p>
-              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
-                Babcock University · Ilishan-Remo, Nigeria
-              </p>
-              <p className="text-sm mt-0.5" style={{ color: 'var(--text-faint)' }}>
-                Expected July 2026 · GPA 4.58 / 5.00
-              </p>
-            </div>
+            ))}
           </motion.div>
 
           {/* Skills */}
@@ -126,14 +89,10 @@ const About = () => {
               className="mt-10 grid grid-cols-3 gap-4 pt-8 border-t"
               style={{ borderColor: 'var(--border)' }}
             >
-              {[
-                { value: '2+',  label: 'Years of\nCoding' },
-                { value: '5+',  label: 'Projects\nDelivered' },
-                { value: '3+',  label: 'Community\nRoles' },
-              ].map(({ value, label }) => (
+              {stats.map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p
-                    className="font-display text-3xl"
+                    className="font-display text-5xl"
                     style={{ fontWeight: 400, color: 'var(--gold)' }}
                   >
                     {value}

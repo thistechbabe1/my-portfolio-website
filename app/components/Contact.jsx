@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { siteConfig } from '../lib/data';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 30 },
@@ -22,38 +23,50 @@ const Contact = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage,   setErrorMessage]   = useState('');
 
-  const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setSuccessMessage('');
     setErrorMessage('');
+
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+    if (!endpoint) {
+      setErrorMessage(`Contact form is not configured. Please email me directly at ${siteConfig.email}`);
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ name, email, message }),
       });
       if (res.ok) {
-        setSuccessMessage('Message sent. I\'ll be in touch soon.');
+        setSuccessMessage("Message sent — I'll be in touch soon.");
         setName(''); setEmail(''); setMessage('');
       } else {
         const data = await res.json();
         setErrorMessage(data.error || 'Something went wrong. Please try again.');
       }
     } catch {
-      setErrorMessage('Unexpected error. Please check your connection and try again.');
+      setErrorMessage('Unexpected error. Please check your connection or email me directly.');
     } finally {
       setIsLoading(false);
     }
   };
 
+  const contactDetails = [
+    { label: 'Email',    value: siteConfig.email,       href: `mailto:${siteConfig.email}` },
+    { label: 'LinkedIn', value: siteConfig.linkedinUrl.replace('https://www.', '').replace('https://', ''),  href: siteConfig.linkedinUrl },
+    { label: 'GitHub',   value: siteConfig.githubUrl.replace('https://', ''),    href: siteConfig.githubUrl },
+    { label: 'Phone',    value: siteConfig.phone,       href: `tel:${siteConfig.phone.replace(/\s+/g, '')}` },
+  ];
+
   return (
-    <section id="contact" className="py-24 theme-bg theme-text">
+    <section id="contact" className="py-24 theme-text">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* Header */}
         <motion.div
           className="mb-14"
           variants={fadeUp}
@@ -62,10 +75,7 @@ const Contact = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <span className="section-divider mb-6" />
-          <p
-            className="text-xs tracking-[0.22em] uppercase mb-3 font-medium"
-            style={{ color: 'var(--text-muted)' }}
-          >
+          <p className="text-xs tracking-[0.14em] uppercase mb-3 font-medium" style={{ color: 'var(--text-muted)' }}>
             Let&apos;s connect
           </p>
           <h2
@@ -78,7 +88,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          {/* Left — Contact Info */}
+          {/* Contact Info */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -92,24 +102,16 @@ const Contact = () => {
             </p>
 
             <div className="space-y-5 pt-2">
-              {[
-                { label: 'Email',    value: 'sharonayolawal@gmail.com', href: 'mailto:sharonayolawal@gmail.com' },
-                { label: 'LinkedIn', value: 'linkedin.com/in/sharon-lawal-9b7289261', href: 'https://www.linkedin.com/in/sharon-lawal-9b7289261/' },
-                { label: 'GitHub',   value: 'github.com/SharonLawal',  href: 'https://github.com/SharonLawal' },
-                { label: 'Phone',    value: '+234 913 418 0175',         href: 'tel:+2349134180175' },
-              ].map(({ label, value, href }) => (
+              {contactDetails.map(({ label, value, href }) => (
                 <div key={label} className="flex gap-6 items-baseline border-b pb-4" style={{ borderColor: 'var(--border)' }}>
-                  <span
-                    className="text-xs tracking-[0.16em] uppercase w-20 shrink-0"
-                    style={{ color: 'var(--text-faint)' }}
-                  >
+                  <span className="text-xs tracking-[0.16em] uppercase w-20 shrink-0" style={{ color: 'var(--text-faint)' }}>
                     {label}
                   </span>
                   <a
                     href={href}
                     target={href.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer"
-                    className="text-sm link-underline transition-colors duration-300 break-all"
+                    className="text-sm link-underline transition-colors duration-300 break-all hover:text-gold"
                     style={{ color: 'var(--text-muted)' }}
                   >
                     {value}
@@ -119,7 +121,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Right — Form */}
+          {/* Form */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -129,11 +131,7 @@ const Contact = () => {
           >
             <form className="space-y-5" onSubmit={handleSubmit}>
               <div>
-                <label
-                  htmlFor="contact-name"
-                  className="block text-xs tracking-[0.14em] uppercase mb-2"
-                  style={{ color: 'var(--text-faint)' }}
-                >
+                <label htmlFor="contact-name" className="block text-xs tracking-[0.14em] uppercase mb-2" style={{ color: 'var(--text-faint)' }}>
                   Name
                 </label>
                 <input
@@ -148,11 +146,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="contact-email"
-                  className="block text-xs tracking-[0.14em] uppercase mb-2"
-                  style={{ color: 'var(--text-faint)' }}
-                >
+                <label htmlFor="contact-email" className="block text-xs tracking-[0.14em] uppercase mb-2" style={{ color: 'var(--text-faint)' }}>
                   Email
                 </label>
                 <input
@@ -167,11 +161,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="contact-message"
-                  className="block text-xs tracking-[0.14em] uppercase mb-2"
-                  style={{ color: 'var(--text-faint)' }}
-                >
+                <label htmlFor="contact-message" className="block text-xs tracking-[0.14em] uppercase mb-2" style={{ color: 'var(--text-faint)' }}>
                   Message
                 </label>
                 <textarea

@@ -2,15 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
-
-const navLinks = [
-  { label: 'Home',     href: '/' },
-  { label: 'About',    href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Contact',  href: '/contact' },
-];
+import { navLinks } from '../lib/data';
 
 const SunIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -33,10 +26,10 @@ const MoonIcon = () => (
 );
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen]   = useState(false);
-  const [isScrolled, setIsScrolled]   = useState(false);
-  const { theme, toggleTheme }        = useTheme();
-  const pathname                      = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -44,38 +37,54 @@ const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Track active section via IntersectionObserver
   useEffect(() => {
-    setIsMenuOpen(false);
-  }, [pathname]);
+    const sectionIds = ['home', ...navLinks.map(link => link.href.slice(1))];
+    const observers = [];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { threshold: 0.3 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const handleNavClick = (e, href) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const id = href.slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'backdrop-blur-md border-b theme-border'
-            : 'border-b border-transparent'
+          isScrolled ? 'border-b theme-border' : 'border-b border-transparent'
         }`}
         style={{
           backgroundColor: isScrolled ? 'var(--bg)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
           boxShadow: isScrolled ? 'var(--shadow)' : 'none',
         }}
       >
         <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-          {/* Logo / Name */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+          {/* Logo */}
+          <a
+            href="#home"
+            onClick={(e) => handleNavClick(e, '#home')}
+            className="font-display text-xl tracking-widest uppercase theme-text hover:text-gold transition-colors duration-300"
+            style={{ fontWeight: 400, letterSpacing: '0.18em' }}
           >
-            <Link
-              href="/"
-              className="font-display text-xl tracking-widest uppercase theme-text hover:text-gold transition-colors duration-300"
-              style={{ fontWeight: 400, letterSpacing: '0.18em' }}
-            >
-              Sharon Lawal
-            </Link>
-          </motion.div>
+            Sharon Lawal
+          </a>
 
           {/* Desktop Nav */}
           <motion.nav
@@ -85,33 +94,24 @@ const Header = () => {
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           >
             {navLinks.map(({ label, href }) => {
-              const isActive = pathname === href;
+              const sectionId = href.slice(1);
+              const isActive = activeSection === sectionId;
               return (
-                <Link
+                <a
                   key={href}
                   href={href}
-                  className={`link-underline text-sm tracking-wider uppercase font-medium transition-colors duration-300 ${
-                    isActive ? 'text-gold' : 'theme-muted hover:theme-text'
+                  onClick={(e) => handleNavClick(e, href)}
+                  className={`relative text-sm font-medium transition-colors duration-300 ${
+                    isActive ? 'text-gold nav-link-active' : 'theme-muted hover:theme-text'
                   }`}
-                  style={{ letterSpacing: '0.1em', fontSize: '0.78rem' }}
+                  style={{ letterSpacing: '0.1em', fontSize: '0.78rem', textTransform: 'uppercase', paddingBottom: '2px' }}
                 >
                   {label}
-                  {isActive && (
-                    <span
-                      className="absolute left-0 bottom-0 w-full h-px"
-                      style={{ background: 'var(--gold)' }}
-                    />
-                  )}
-                </Link>
+                </a>
               );
             })}
 
-            {/* CV Link */}
-            <Link
-              href="/cv"
-              className="btn-outline text-xs py-2 px-5"
-              style={{ letterSpacing: '0.12em' }}
-            >
+            <Link href="/cv" className="btn-outline text-xs py-2 px-5" style={{ letterSpacing: '0.12em' }}>
               CV
             </Link>
 
@@ -126,7 +126,7 @@ const Header = () => {
                 <motion.span
                   key={theme}
                   initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
-                  animate={{ opacity: 1, rotate: 0,   scale: 1 }}
+                  animate={{ opacity: 1, rotate: 0,   scale: 1   }}
                   exit={{    opacity: 0, rotate:  30, scale: 0.7 }}
                   transition={{ duration: 0.25 }}
                 >
@@ -138,11 +138,7 @@ const Header = () => {
 
           {/* Mobile Controls */}
           <div className="md:hidden flex items-center gap-4">
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="theme-muted hover:text-gold transition-colors duration-300"
-            >
+            <button onClick={toggleTheme} aria-label="Toggle theme" className="theme-muted hover:text-gold transition-colors duration-300">
               {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
             <button
@@ -165,35 +161,31 @@ const Header = () => {
           <motion.div
             key="mobile-menu"
             initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1,  y: 0   }}
-            exit={{    opacity: 0,  y: -16  }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{    opacity: 0, y: -16 }}
             transition={{ duration: 0.28, ease: 'easeOut' }}
             className="fixed top-[73px] left-0 right-0 z-40 border-b theme-border"
             style={{ backgroundColor: 'var(--bg)', boxShadow: 'var(--shadow-md)' }}
           >
             <nav className="max-w-6xl mx-auto px-6 py-8 flex flex-col gap-6">
               {navLinks.map(({ label, href }) => {
-                const isActive = pathname === href;
+                const sectionId = href.slice(1);
+                const isActive = activeSection === sectionId;
                 return (
-                  <Link
+                  <a
                     key={href}
                     href={href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`text-sm tracking-widest uppercase font-medium transition-colors duration-300 ${
+                    onClick={(e) => handleNavClick(e, href)}
+                    className={`text-sm font-medium transition-colors duration-300 ${
                       isActive ? 'text-gold' : 'theme-muted hover:theme-text'
                     }`}
-                    style={{ letterSpacing: '0.14em' }}
+                    style={{ letterSpacing: '0.14em', textTransform: 'uppercase' }}
                   >
                     {label}
-                  </Link>
+                  </a>
                 );
               })}
-              <Link
-                href="/cv"
-                onClick={() => setIsMenuOpen(false)}
-                className="btn-outline text-xs self-start py-2 px-5"
-                style={{ letterSpacing: '0.12em' }}
-              >
+              <Link href="/cv" className="btn-outline text-xs self-start py-2 px-5" style={{ letterSpacing: '0.12em' }}>
                 View CV
               </Link>
             </nav>

@@ -4,29 +4,22 @@ import Link from 'next/link';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
 import { SiGmail } from 'react-icons/si';
+import { siteConfig, socialLinks } from '../lib/data';
 
-const socialLinks = [
-  {
-    icon: <FaLinkedin size={17} />,
-    href: 'https://www.linkedin.com/in/sharon-lawal-9b7289261/',
-    label: 'LinkedIn',
-  },
-  {
-    icon: <FaGithub size={17} />,
-    href: 'https://github.com/SharonLawal',
-    label: 'GitHub',
-  },
-  {
-    icon: <BsTwitterX size={15} />,
-    href: 'https://x.com/thistechbabe',
-    label: 'X / Twitter',
-  },
-  {
-    icon: <SiGmail size={15} />,
-    href: 'mailto:sharonayolawal@gmail.com',
-    label: 'Email',
-  },
-];
+const getSocialIcon = (platform) => {
+  switch (platform) {
+    case 'linkedin':
+      return <FaLinkedin size={17} />;
+    case 'github':
+      return <FaGithub size={17} />;
+    case 'twitter':
+      return <BsTwitterX size={15} />;
+    case 'email':
+      return <SiGmail size={15} />;
+    default:
+      return null;
+  }
+};
 
 const Footer = () => (
   <footer
@@ -42,7 +35,7 @@ const Footer = () => (
           className="font-display text-base tracking-widest uppercase hover:text-gold transition-colors duration-300"
           style={{ fontWeight: 400, letterSpacing: '0.16em', color: 'var(--text-muted)' }}
         >
-          Sharon Lawal
+          {siteConfig.name}
         </Link>
         <p className="text-xs mt-1" style={{ color: 'var(--text-faint)', letterSpacing: '0.04em' }}>
           © {new Date().getFullYear()} · All rights reserved
@@ -51,7 +44,7 @@ const Footer = () => (
 
       {/* Right — social icons */}
       <div className="flex items-center gap-5">
-        {socialLinks.map(({ icon, href, label }) => (
+        {socialLinks.map(({ label, href, platform }) => (
           <a
             key={label}
             href={href}
@@ -61,7 +54,7 @@ const Footer = () => (
             className="transition-colors duration-300 hover:text-gold"
             style={{ color: 'var(--text-faint)' }}
           >
-            {icon}
+            {getSocialIcon(platform)}
           </a>
         ))}
       </div>

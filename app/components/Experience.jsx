@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { experiences } from '../lib/data';
 
 const fadeUp = {
@@ -15,49 +15,27 @@ const TimelineItem = ({ exp, index }) => (
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.2 }}
-    transition={{ delay: index * 0.07 }}
+    transition={{ delay: index * 0.06 }}
   >
-    {/* Vertical line */}
-    <div
-      className="absolute left-0 top-0 bottom-0 w-px"
-      style={{ background: 'var(--border)' }}
-    />
-    {/* Dot */}
-    <div
-      className="absolute left-[-3px] top-[6px] w-[7px] h-[7px] rounded-full"
-      style={{ background: 'var(--gold)' }}
-    />
+    <div className="absolute left-0 top-0 bottom-0 w-px" style={{ background: 'var(--border)' }} />
+    <div className="absolute left-[-3px] top-[6px] w-[7px] h-[7px] rounded-full" style={{ background: 'var(--gold)' }} />
 
-    {/* Content */}
     <div>
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
-        <h3
-          className="font-display text-xl"
-          style={{ fontWeight: 500, color: 'var(--text)', fontSize: '1.2rem' }}
-        >
+        <h3 className="text-base sm:text-lg font-semibold" style={{ color: 'var(--text)' }}>
           {exp.title}
         </h3>
-        <span
-          className="text-xs tracking-wider whitespace-nowrap shrink-0"
-          style={{ color: 'var(--text-faint)', letterSpacing: '0.06em' }}
-        >
+        <span className="text-xs tracking-wider whitespace-nowrap shrink-0" style={{ color: 'var(--text-faint)', letterSpacing: '0.06em' }}>
           {exp.duration}
         </span>
       </div>
-      <p
-        className="text-sm mb-3 font-medium"
-        style={{ color: 'var(--gold)' }}
-      >
+      <p className="text-sm mb-3 font-medium" style={{ color: 'var(--gold)' }}>
         {exp.company}
         {exp.location && <span style={{ color: 'var(--text-faint)', fontWeight: 400 }}> · {exp.location}</span>}
       </p>
       <ul className="space-y-1.5">
         {exp.description.map((point, i) => (
-          <li
-            key={i}
-            className="text-sm leading-relaxed flex gap-2"
-            style={{ color: 'var(--text-muted)' }}
-          >
+          <li key={i} className="text-sm leading-relaxed flex gap-2" style={{ color: 'var(--text-muted)' }}>
             <span style={{ color: 'var(--gold)', marginTop: '0.35rem', flexShrink: 0, fontSize: '0.45rem' }}>◆</span>
             <span>{point}</span>
           </li>
@@ -74,10 +52,9 @@ const Experience = () => {
   const displayed    = activeTab === 'professional' ? professional : community;
 
   return (
-    <section id="experience" className="py-24 theme-bg theme-text">
+    <section id="experience" className="py-24 theme-text">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* Header */}
         <motion.div
           className="mb-14"
           variants={fadeUp}
@@ -86,10 +63,7 @@ const Experience = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <span className="section-divider mb-6" />
-          <p
-            className="text-xs tracking-[0.22em] uppercase mb-3 font-medium"
-            style={{ color: 'var(--text-muted)' }}
-          >
+          <p className="text-xs tracking-[0.14em] uppercase mb-3 font-medium" style={{ color: 'var(--text-muted)' }}>
             My Journey
           </p>
           <h2
@@ -128,11 +102,21 @@ const Experience = () => {
           ))}
         </div>
 
-        {/* Timeline */}
-        <div className="max-w-3xl">
-          {displayed.map((exp, i) => (
-            <TimelineItem key={`${exp.title}-${i}`} exp={exp} index={i} />
-          ))}
+        {/* Timeline — AnimatePresence for smooth tab switch */}
+        <div className="max-w-3xl overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{    opacity: 0 }}
+              transition={{ duration: 0.32, ease: 'easeOut' }}
+            >
+              {displayed.map((exp, i) => (
+                <TimelineItem key={`${exp.title}-${i}`} exp={exp} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>

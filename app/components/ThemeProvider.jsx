@@ -22,12 +22,12 @@ export function ThemeProvider({ children }) {
     document.documentElement.classList.toggle('dark', next === 'dark');
   };
 
-  // Prevent flash of wrong theme
-  if (!mounted) return null;
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+      {/* Invisible until theme is resolved — prevents flash of wrong theme without blank page */}
+      <div style={{ visibility: mounted ? 'visible' : 'hidden' }}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 }

@@ -12,7 +12,7 @@ const fadeUp = {
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 theme-bg theme-text">
+    <section id="projects" className="py-24 theme-text">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}
@@ -25,7 +25,7 @@ const Projects = () => {
         >
           <span className="section-divider mb-6" />
           <p
-            className="text-xs tracking-[0.22em] uppercase mb-3 font-medium"
+            className="text-xs tracking-[0.14em] uppercase mb-3 font-medium"
             style={{ color: 'var(--text-muted)' }}
           >
             Selected Work
@@ -44,7 +44,6 @@ const Projects = () => {
             <motion.article
               key={index}
               className="card flex flex-col overflow-hidden group"
-              style={{ borderRadius: 0 }}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
