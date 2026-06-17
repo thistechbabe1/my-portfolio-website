@@ -1,72 +1,112 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGraduationCap, FaCode } from 'react-icons/fa';
+import { siteConfig, skills, stats } from '../lib/data';
+
+const fadeUp = {
+  hidden:  { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
 
 const About = () => {
   return (
-    <section id="about" className="py-16 bg-transparent text-text-light">
-      <div className="container mx-auto px-6">
+    <section id="about" className="py-24 theme-text">
+      <div className="max-w-6xl mx-auto px-6">
+
+        {/* Header */}
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          className="mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <p className="text-xl font-semibold text-accent-green">Get To Know More</p>
-          <h1 className="text-4xl font-bold mt-2">About Me</h1>
+          <span className="section-divider mb-6" />
+          <p
+            className="text-xs tracking-[0.14em] uppercase mb-3 font-medium"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Get to know me
+          </p>
+          <h2
+            className="font-display leading-tight"
+            style={{ fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', fontWeight: 500, color: 'var(--text)' }}
+          >
+            About Me
+          </h2>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row lg:space-x-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
+          {/* Bio */}
           <motion.div
-            className="w-full lg:w-1/2 mb-8 lg:mb-0 flex flex-col space-y-6"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
+            className="space-y-5"
           >
-            <div className="bg-dark-secondary rounded-lg shadow-xl p-6 border-2 border-dark-tertiary flex items-center space-x-4">
-              <div className="text-accent-green text-4xl p-3 rounded-full bg-dark-tertiary-lighter flex items-center justify-center border border-accent-green">
-                <FaGraduationCap />
-              </div>
-              <div>
-                <h3 className="text-2xl font-semibold">Education</h3>
-                <p className="text-text-muted">B.Sc. Software Engineering</p>
-                <p className="text-text-muted">Babcock University (Expected Graduation in 2026)</p>
-              </div>
-            </div>
-
-            <div className="bg-dark-secondary rounded-lg shadow-xl p-6 border-2 border-dark-tertiary flex items-center space-x-4">
-              <div className="text-accent-purple text-4xl p-3 rounded-full bg-dark-tertiary-lighter flex items-center justify-center border border-accent-purple">
-                <FaCode />
-              </div>
-              <div>
-                <h3 className="text-2xl font-semibold">Experience</h3>
-                <p className="text-text-muted">Frontend & Backend Development</p>
-                <p className="text-text-muted">API Integration & Testing</p>
-                <p className="text-text-muted">Version Control (GitLab, GitHub)</p>
-              </div>
-            </div>
-
+            {siteConfig.bio.map((para, idx) => (
+              <p key={idx} className="text-base leading-[1.85]" style={{ color: 'var(--text-muted)' }}>
+                {para}
+              </p>
+            ))}
           </motion.div>
 
+          {/* Skills */}
           <motion.div
-            className="w-full lg:w-1/2 flex flex-col justify-center"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.15 }}
           >
-            <p className="text-lg leading-relaxed text-justify mb-4">
-              I'm <strong className="text-accent-green-light">Sharon Lawal</strong>, a highly motivated Software Engineer student passionate about building impactful web solutions. With hands-on experience in both <strong className="text-accent-green">frontend and backend development</strong>, I excel at crafting intuitive user interfaces and seamlessly integrating robust backend systems. My expertise spans across Angular, React, Node.js, Python, and modern databases.
+            <p
+              className="text-xs tracking-[0.18em] uppercase mb-5 font-medium"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Technical Skills
             </p>
-            <p className="text-lg leading-relaxed text-justify">
-              Beyond coding, I bring a strong foundation in <strong className="text-accent-green">project management</strong>, demonstrated by overseeing projects and coordinating cross-functional teams to ensure successful, on-time deliveries. My proactive approach to problem-solving, coupled with a dedication to continuous learning and agile methodologies, drives me to deliver comprehensive and effective software solutions that meet user needs.
-            </p>
-          </motion.div>
+            <div className="flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="text-xs px-3 py-1.5 border"
+                  style={{
+                    borderColor: 'var(--border-gold)',
+                    color: 'var(--text-muted)',
+                    backgroundColor: 'var(--gold-subtle)',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
 
+            {/* Quick stats */}
+            <div
+              className="mt-10 grid grid-cols-3 gap-4 pt-8 border-t"
+              style={{ borderColor: 'var(--border)' }}
+            >
+              {stats.map(({ value, label }) => (
+                <div key={label} className="text-center">
+                  <p
+                    className="font-display text-5xl"
+                    style={{ fontWeight: 400, color: 'var(--gold)' }}
+                  >
+                    {value}
+                  </p>
+                  <p
+                    className="text-xs mt-1 leading-snug whitespace-pre-line"
+                    style={{ color: 'var(--text-faint)', letterSpacing: '0.04em' }}
+                  >
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
