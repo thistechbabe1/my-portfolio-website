@@ -62,17 +62,6 @@ const Projects = () => {
                     quality={75}
                     onError={(e) => { e.target.src = '/assets/images/il.png'; }}
                   />
-                  {/* Year badge */}
-                  <span
-                    className="absolute top-3 right-3 text-xs px-2 py-1"
-                    style={{
-                      background: 'var(--bg)',
-                      color: 'var(--text-faint)',
-                      letterSpacing: '0.08em',
-                    }}
-                  >
-                    {project.year}
-                  </span>
                 </div>
               )}
 
