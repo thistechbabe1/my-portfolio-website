@@ -53,7 +53,6 @@ const OrbitingIcons = ({ radius = 148 }) => {
 
   return (
     <div
-      className="hidden lg:block"
       aria-hidden="true"
       style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
     >
@@ -85,59 +84,72 @@ const OrbitingIcons = ({ radius = 148 }) => {
                   ? { duration: 0 }
                   : { duration, delay, ease: 'easeInOut', repeat: Infinity, repeatType: 'mirror' }
               }
-              onHoverStart={() => setHoveredIdx(idx)}
-              onHoverEnd={()  => setHoveredIdx(null)}
             >
-              {/* Icon bubble */}
-              <div
-                title={item.label}
-                style={{
-                  width:  `${ICON_SIZE}px`,
-                  height: `${ICON_SIZE}px`,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: 'var(--bg-elevated)',
-                  border: `1.5px solid ${isHovered ? item.color : 'var(--border-gold)'}`,
-                  boxShadow: isHovered
-                    ? `0 0 12px ${item.color}55, 0 0 0 3px var(--gold-subtle)`
-                    : '0 2px 10px rgba(0,0,0,0.16)',
-                  color: isHovered ? item.color : 'var(--text-muted)',
-                  transition: 'border-color 0.28s ease, box-shadow 0.28s ease, color 0.28s ease',
-                  cursor: 'default',
-                }}
-              >
-                {item.icon}
-              </div>
-            </motion.div>
-
-            {/* Hover tooltip */}
-            {isHovered && (
               <motion.div
-                initial={{ opacity: 0, y: 3 }}
-                animate={{ opacity: 1, y: 0 }}
+                drag
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                dragElastic={0.9}
+                dragTransition={{ bounceStiffness: 450, bounceDamping: 18 }}
+                whileDrag={{ scale: 1.15, cursor: 'grabbing' }}
+                onHoverStart={() => setHoveredIdx(idx)}
+                onHoverEnd={()  => setHoveredIdx(null)}
                 style={{
-                  position: 'absolute',
-                  top: '100%',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  marginTop: '5px',
-                  whiteSpace: 'nowrap',
-                  fontSize: '0.58rem',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 500,
-                  background: 'var(--bg)',
-                  padding: '2px 7px',
-                  border: '1px solid var(--border-gold)',
+                  cursor: 'grab',
+                  touchAction: 'none',
+                  position: 'relative',
                 }}
               >
-                {item.label}
+                {/* Icon bubble */}
+                <div
+                  title={item.label}
+                  style={{
+                    width:  `${ICON_SIZE}px`,
+                    height: `${ICON_SIZE}px`,
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'var(--bg-elevated)',
+                    border: `1.5px solid ${isHovered ? item.color : 'var(--border-gold)'}`,
+                    boxShadow: isHovered
+                      ? `0 0 12px ${item.color}55, 0 0 0 3px var(--gold-subtle)`
+                      : '0 2px 10px rgba(0,0,0,0.16)',
+                    color: isHovered ? item.color : 'var(--text-muted)',
+                    transition: 'border-color 0.28s ease, box-shadow 0.28s ease, color 0.28s ease',
+                  }}
+                >
+                  {item.icon}
+                </div>
+
+                {/* Hover tooltip */}
+                {isHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 3 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      marginTop: '5px',
+                      whiteSpace: 'nowrap',
+                      fontSize: '0.58rem',
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: 'var(--gold)',
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: 500,
+                      background: 'var(--bg)',
+                      padding: '2px 7px',
+                      border: '1px solid var(--border-gold)',
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    {item.label}
+                  </motion.div>
+                )}
               </motion.div>
-            )}
+            </motion.div>
           </div>
         );
       })}
