@@ -6,8 +6,8 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { projects } from '../lib/data';
 
 const fadeUp = {
-  hidden:  { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  hidden:  { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const Projects = () => {
@@ -62,17 +62,6 @@ const Projects = () => {
                     quality={75}
                     onError={(e) => { e.target.src = '/assets/images/il.png'; }}
                   />
-                  {/* Year badge */}
-                  <span
-                    className="absolute top-3 right-3 text-xs px-2 py-1"
-                    style={{
-                      background: 'var(--bg)',
-                      color: 'var(--text-faint)',
-                      letterSpacing: '0.08em',
-                    }}
-                  >
-                    {project.year}
-                  </span>
                 </div>
               )}
 

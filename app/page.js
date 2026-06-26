@@ -11,40 +11,32 @@ import Contact from './components/Contact';
 export default function HomePage() {
   return (
     <>
-      {/* 1. Hero (Odd - theme-bg) */}
-      <div className="theme-bg">
-        <Profile />
-      </div>
+      {/* 1. Hero (Odd - transparent) */}
+      <Profile />
 
-      {/* 2. About (Even - theme-surface) */}
-      <div className="theme-surface">
+      {/* 2. About (Even - translucent) */}
+      <div className="theme-surface-translucent border-y border-[rgba(179,142,43,0.08)]">
         <About />
       </div>
 
-      {/* 3. Education (Odd - theme-bg) */}
-      <div className="theme-bg">
-        <Education />
-      </div>
+      {/* 3. Education (Odd - transparent) */}
+      <Education />
 
-      {/* 4. Technologies (Even - theme-surface) */}
-      <div className="theme-surface">
+      {/* 4. Technologies (Even - translucent) */}
+      <div className="theme-surface-translucent border-y border-[rgba(179,142,43,0.08)]">
         <Technologies />
       </div>
 
-      {/* 5. Experience (Odd - theme-bg) */}
-      <div className="theme-bg">
-        <Experience />
-      </div>
+      {/* 5. Experience (Odd - transparent) */}
+      <Experience />
 
-      {/* 6. Projects (Even - theme-surface) */}
-      <div className="theme-surface">
+      {/* 6. Projects (Even - translucent) */}
+      <div className="theme-surface-translucent border-y border-[rgba(179,142,43,0.08)]">
         <Projects />
       </div>
 
-      {/* 7. Contact (Odd - theme-bg) */}
-      <div className="theme-bg">
-        <Contact />
-      </div>
+      {/* 7. Contact (Odd - transparent) */}
+      <Contact />
     </>
   );
 }

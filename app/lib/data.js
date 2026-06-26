@@ -90,10 +90,10 @@ export const experiences = [
     location: 'Hybrid',
     duration: 'Jan 2025 – Jun 2025',
     description: [
-      "Developed web applications using Angular and TypeScript, implementing component-based architecture and following Angular best practices.",
-      "Integrated RESTful APIs to enable seamless data exchange between frontend and backend services.",
-      "Collaborated with frontend and QA teams to build responsive, cross-device web components.",
-      "Managed code versioning with GitLab and handled merge requests and participated in structured code reviews.",
+      "Developed and shipped production-ready Angular and TypeScript components integrated into a platform serving millions of active users across Nigeria.",
+      "Integrated RESTful APIs across 3+ frontend modules, enabling real-time data exchange between frontend and backend services.",
+      "Collaborated with frontend and QA teams to build responsive, cross-device web components, reducing reported UI defects through thorough pre-release testing.",
+      "Participated in structured code reviews across a team of 6+ engineers, maintaining code quality and consistency on GitLab.",
       "Conducted thorough application testing to identify and resolve bugs prior to production deployment."
     ]
   },
@@ -117,8 +117,8 @@ export const experiences = [
     location: '',
     duration: 'Jan 2026 – Jul 2026',
     description: [
-      "Orchestrated the operational lifecycle of cross-functional student-led projects, overseeing technical teams from product ideation through to successful deployment.",
-      "Bridged the gap between engineering execution and strategic goals, ensuring strict team alignment and timely delivery of tech hub initiatives."
+      "Oversaw the operational lifecycle of 3 cross-functional student-led projects across 3 teams within 4 months, with 3 projects reaching live deployment.",
+      "Coordinated 20+ contributors across parallel product teams, bridging engineering execution and strategic delivery timelines to ensure on-schedule releases."
     ]
   },
   {
@@ -128,8 +128,8 @@ export const experiences = [
     location: '',
     duration: 'Mar 2026 – Apr 2026',
     description: [
-      "Led operational coordination for a 3-day industry summit with 1,000+ attendees, overseeing logistics, scheduling, and on-the-day execution.",
-      "Coordinated across stakeholder teams, managing resource allocation and timelines between speakers, sponsors, and field trip organizers."
+      "Led operational coordination for a 3-day industry summit with 1,000+ attendees, managing logistics for 9 industry speakers including representatives from Google, Mastercard, and Moniepoint.",
+      "Coordinated across 8 external partners and oversaw ₦5,000,000 in secured sponsorships, managing resource allocation and timelines between speakers, sponsors, and field trip organizers."
     ]
   },
   {
@@ -139,8 +139,8 @@ export const experiences = [
     location: '',
     duration: 'Apr 2026',
     description: [
-      "Managed student volunteer teams across operational units, ensuring alignment and smooth execution throughout the summit.",
-      "Supported coordination of startup pitching sessions and technical programming across event days."
+      "Managed 53 student volunteers across 7 operational units, maintaining alignment and smooth execution throughout the summit.",
+      "Supported coordination of startup pitching sessions featuring 29 startups and 8 judges, standardising slide submission and technical processes to prevent live-session disruptions."
     ]
   },
   {
@@ -150,9 +150,9 @@ export const experiences = [
     location: '',
     duration: 'Sep 2025 – Jun 2026',
     description: [
-      "Oversaw day-to-day operations of GDG on Campus, coordinating logistics for technical events, workshops, and developer meetups.",
-      "Managed event planning timelines, resource allocation, and vendor coordination to ensure smooth community programming.",
-      "Tracked event metrics and community engagement data to continuously improve member experience."
+      "Coordinated operations for a community of 300+ active members, achieving approximately 70% member retention across the academic year.",
+      "Planned and executed 5 monthly meetups (averaging 100 attendees each) and 10 weekly sessions (averaging 50 participants per session).",
+      "Led cross-functional collaboration across community relations, marketing, and technical teams of 10+ organizers, tracking event metrics to improve future programming."
     ]
   },
   {
@@ -204,9 +204,9 @@ export const projects = [
 export const siteConfig = {
   name: 'Sharon Lawal',
   tagline: 'Software Engineer with experience building web applications using Angular, React, and TypeScript, and a strong background in operations and project management. Passionate about building impactful digital experiences.',
-  rolesText: 'Software Engineer  ·  Project Manager',
+  rolesText: 'Operations Executive | Project Manager | Software Engineer',
   bio: [
-    "Software Engineer with experience building web applications using Angular, React, and TypeScript. Gained hands-on experience in API integration, feature development, and cross-functional collaboration through internships at Remita Payment Services Limited (RPSL) and DavTech. Strong foundation in problem-solving and delivering user-focused solutions, complemented by leadership experience in operations, event management, and team coordination.",
+    "Software Engineer with experience building web applications using Angular, React, and TypeScript. Gained hands-on experience in API integration, feature development, and cross-functional collaboration through internships at Remita Payment Services Limited (RPSL) and DavTech. Strong foundation in problem-solving and delivering user-focused solutions, complemented by a proven track record in operations leadership, event management, and cross-functional team coordination across large-scale technical programmes.",
     "Brings a blend of technical expertise, organizational skills, and adaptability, with an interest in opportunities that combine technology, operations, and management."
   ],
   email: 'sharonayolawal@gmail.com',
@@ -249,7 +249,7 @@ export const education = {
   degree:   'B.Sc. Software Engineering',
   school:   'Babcock University',
   location: 'Ilishan-Remo, Ogun State, Nigeria',
-  period:   '2022 – 2026',
+  period:   '2022-2026',
   details: [
     'Cumulative GPA: 4.58 / 5.00',
     'Relevant Coursework: Data Structures & Algorithms, Operating Systems, Web Development, Model-Based Software Engineering, Software Security Engineering, Programming in Java, Embedded Systems, Object-Oriented Software Development, Linux System Administration, Artificial Intelligence & Applications',

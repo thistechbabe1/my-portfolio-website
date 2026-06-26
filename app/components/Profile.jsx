@@ -45,6 +45,20 @@ const Profile = () => {
   const roleIndexRef  = useRef(0);
   const charIndexRef  = useRef(0);
   const isDeletingRef = useRef(false);
+  const [radius, setRadius] = useState(148);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setRadius(94);
+      } else {
+        setRadius(148);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let timer;
@@ -91,15 +105,15 @@ const Profile = () => {
   return (
     <section
       id="home"
-      className="relative flex items-center min-h-[calc(100vh-80px)] lg:h-[calc(100vh-80px)] lg:max-h-[calc(100vh-80px)] overflow-y-auto lg:overflow-hidden py-12 lg:py-0"
+      className="relative flex items-center overflow-hidden py-4 lg:py-0 select-none"
+      style={{
+        height: 'calc(100dvh - 80px)',
+        maxHeight: 'calc(100dvh - 80px)',
+      }}
     >
-      <AnimatedBackground />
 
-      <div
-        className="max-w-6xl mx-auto px-6 w-full"
-        style={{ paddingTop: '24px', paddingBottom: '24px' }}
-      >
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 h-full">
+      <div className="max-w-6xl mx-auto px-6 w-full py-4 lg:py-6">
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-4 lg:gap-12 h-full">
 
           {/* ── Text Column ── */}
           <motion.div
@@ -110,7 +124,7 @@ const Profile = () => {
           >
             <motion.p
               variants={itemVariants}
-              className="text-sm tracking-[0.14em] uppercase mb-3 font-medium"
+              className="text-sm tracking-[0.14em] uppercase mb-1.5 lg:mb-3 font-medium"
               style={{ color: 'var(--text-muted)' }}
             >
               Hello, I&apos;m
@@ -118,9 +132,9 @@ const Profile = () => {
 
             <motion.h1
               variants={itemVariants}
-              className="font-display leading-[1.05] mb-3"
+              className="font-display leading-[1.05] mb-2 lg:mb-3"
               style={{
-                fontSize: 'clamp(3.2rem, 6vw, 6rem)',
+                fontSize: 'clamp(2.2rem, 8vw, 5.5rem)',
                 fontWeight: 500,
                 color: 'var(--text)',
                 letterSpacing: '-0.02em',
@@ -132,7 +146,7 @@ const Profile = () => {
             {/* Typing role */}
             <motion.div
               variants={itemVariants}
-              className="relative mb-5 flex items-center justify-center lg:justify-start"
+              className="relative mb-4 lg:mb-5 flex items-center justify-center lg:justify-start"
               style={{ minHeight: '2rem' }}
             >
               <span
@@ -162,7 +176,7 @@ const Profile = () => {
 
             <motion.p
               variants={itemVariants}
-              className="text-base leading-relaxed mb-7 max-w-lg mx-auto lg:mx-0"
+              className="text-sm lg:text-base leading-relaxed mb-5 lg:mb-7 max-w-lg mx-auto lg:mx-0"
               style={{ color: 'var(--text-muted)' }}
             >
               {siteConfig.tagline}
@@ -191,7 +205,7 @@ const Profile = () => {
             {/* Social links */}
             <motion.div
               variants={itemVariants}
-              className="mt-7 flex gap-4 justify-center lg:justify-start"
+              className="mt-5 lg:mt-7 flex gap-4 justify-center lg:justify-start"
             >
               {socialLinks.map(({ label, href, platform }) => (
                 <a
@@ -224,24 +238,24 @@ const Profile = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           >
-            {/* Decorative orbit ring — desktop only */}
+            {/* Decorative orbit ring */}
             <div
-              className="hidden lg:block absolute pointer-events-none rounded-full"
+              className="absolute pointer-events-none rounded-full"
               style={{
-                inset: '22px',          // pulls ring inward to icon centres
+                width: `${radius * 2}px`,
+                height: `${radius * 2}px`,
                 border: '1px dashed var(--border-gold)',
                 opacity: 0.32,
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
               }}
             />
 
             {/* Profile photo */}
             <motion.div
-              className="rounded-full overflow-hidden relative z-10"
+              className="rounded-full overflow-hidden relative z-10 w-[130px] h-[130px] lg:w-[220px] lg:h-[220px]"
               style={{
-                width: '180px',
-                height: '180px',
-                width: '220px',
-                height: '220px',
                 boxShadow: '0 0 0 1px var(--border-gold), 0 0 0 7px var(--gold-subtle)',
               }}
               animate={{ y: ['0%', '-3%', '0%'] }}
@@ -256,8 +270,8 @@ const Profile = () => {
               />
             </motion.div>
 
-            {/* Orbiting icons — desktop only */}
-            <OrbitingIcons radius={ORBIT_RADIUS} />
+            {/* Orbiting icons */}
+            <OrbitingIcons radius={radius} />
           </motion.div>
         </div>
 

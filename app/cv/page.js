@@ -209,7 +209,11 @@ export default function CVPage() {
                     </span>
                   )}
                 </span>
-                <span style={s.period}>{proj.year}</span>
+                <span style={s.period}>
+                  <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" style={{ color: '#C9A84C', textDecoration: 'none', marginRight: '6px' }}>GitHub</a>
+                  <span style={{ color: '#ccc' }}>·</span>
+                  <a href={proj.liveLink} target="_blank" rel="noopener noreferrer" style={{ color: '#C9A84C', textDecoration: 'none', marginLeft: '6px' }}>Live</a>
+                </span>
               </div>
               {proj.tags && (
                 <div style={{ ...s.org, color: '#C9A84C', marginBottom: '5px' }}>
