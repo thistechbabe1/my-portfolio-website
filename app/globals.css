@@ -241,3 +241,9 @@ body {
 .dark .theme-surface-translucent {
   background-color: rgba(20, 20, 20, 0.55);
 }
+
+/* ─── Custom Cursor Hiding ───────────────────────────────────────── */
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none !important;
+}

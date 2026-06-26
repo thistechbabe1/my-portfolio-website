@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
 import AnimatedBackground from './components/AnimatedBackground';
+import CustomCursor from './components/CustomCursor';
 
 
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="flex flex-col min-h-screen theme-bg theme-text" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
         <ThemeProvider>
+          <CustomCursor />
           <AnimatedBackground />
           <Header />
           <main className="flex-grow pt-20">
