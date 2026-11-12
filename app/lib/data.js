@@ -2,6 +2,7 @@ import React from 'react';
 import {
   FaJsSquare, FaReact, FaAngular, FaHtml5, FaCss3Alt,
   FaAws, FaGithub, FaMobileAlt, FaCodeBranch, FaTools, FaGitAlt,
+  FaUsers, FaCalendarAlt, FaProjectDiagram,
 } from 'react-icons/fa';
 import {
   SiNotion, SiTrello, SiTypescript, SiNextdotjs, SiNodedotjs,
@@ -67,6 +68,17 @@ export const technologiesCategories = [
       { name: 'Responsive Design',   icon: <FaMobileAlt /> },
       { name: 'Version Control',     icon: <FaCodeBranch /> },
       { name: 'Testing & Debugging', icon: <FaTools /> },
+      { name: 'Component-Based Architecture', icon: <FaProjectDiagram /> },
+    ],
+  },
+  {
+    category: 'Management',
+    items: [
+      { name: 'Event Planning',                icon: <FaCalendarAlt /> },
+      { name: 'Stakeholder Communication',     icon: <FaUsers /> },
+      { name: 'Cross-Functional Collaboration', icon: <FaUsers /> },
+      { name: 'Team Coordination',             icon: <FaUsers /> },
+      { name: 'Project Management',            icon: <FaProjectDiagram /> },
     ],
   },
 ];
@@ -171,33 +183,30 @@ export const experiences = [
 export const projects = [
   {
     title: 'DevJournal',
-    subtitle: 'Developer Productivity Platform',
+    subtitle: 'AI-Augmented Engineering Journal',
     description: 'Created a platform for developers to track coding progress, document learnings, and organise technical notes, with a focus on clean, distraction-free UI.',
     githubLink: 'https://github.com/thistechbabe1/DevJournal',
-    liveLink:   'https://devjournaal.netlify.app/',
+    liveLink:   'https://devjournal.netlify.app/',
     image:      '/assets/images/journal.png',
-    tags:       ['Angular', 'Node.js', 'MongoDB'],
-    year:       '2024',
+    tags:       ['Angular', 'Node.js', 'MongoDB', 'Google Gemini'],
   },
   {
-    title: 'Solex',
-    subtitle: 'E-Commerce Website',
-    description: 'Built a fully responsive e-commerce site for an innovative footwear brand, showcasing collections with optimised layouts for desktop and mobile.',
-    githubLink: 'https://github.com/thistechbabe1/Solex',
-    liveLink:   'https://solex1.netlify.app/',
-    image:      '/assets/images/solex.png',
-    tags:       ['React', 'Tailwind CSS'],
-    year:       '2024',
+    title: 'Kobo',
+    subtitle: 'Digital Wallet & Payments Dashboard',
+    description: 'Developed a digital wallet experience with account-name resolution, guided transfers, transaction history, fee calculations and spending analytics.',
+    githubLink: 'https://github.com/thistechbabe1/kobo',
+    liveLink:   'https://kobo-theta-nine.vercel.app/',
+    image:      '/assets/images/kobo.png',
+    tags:       ['Next.js', 'React', 'TypeScript'],
   },
   {
-    title: 'Skin Sphere',
-    subtitle: 'Beauty & Skincare Showcase',
-    description: 'Developed a product showcase featuring filtering, item comparison, and optimised image loading for fast, user-friendly browsing.',
-    githubLink: 'https://github.com/thistechbabe1/SkinsphereHNG',
-    liveLink:   'https://skinsphere.netlify.app/',
-    image:      '/assets/images/skinsphere.png',
-    tags:       ['React', 'JavaScript'],
-    year:       '2024',
+    title: 'Refreshing Website',
+    subtitle: 'Conference Website & Admin Portal',
+    description: 'Built a conference platform featuring event schedules, speaker information, digital resources and an administrative portal for managing event content and attendee check-in.',
+    githubLink: 'https://github.com/lsbsf-dev/refrshing-website',
+    liveLink:   'https://refreshing.website/',
+    image:      '/assets/images/refreshing.png',
+    tags:       ['Next.js', 'React', 'TypeScript', 'Firebase'],
   },
 ];
 
