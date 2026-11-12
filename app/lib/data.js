@@ -187,7 +187,7 @@ export const projects = [
     description: 'Created a platform for developers to track coding progress, document learnings, and organise technical notes, with a focus on clean, distraction-free UI.',
     githubLink: 'https://github.com/thistechbabe1/DevJournal',
     liveLink:   'https://devjournal.netlify.app/',
-    image:      '/assets/images/journal.png',
+    image:      '/assets/images/journal.jpg',
     tags:       ['Angular', 'Node.js', 'MongoDB', 'Google Gemini'],
   },
   {
@@ -196,7 +196,7 @@ export const projects = [
     description: 'Developed a digital wallet experience with account-name resolution, guided transfers, transaction history, fee calculations and spending analytics.',
     githubLink: 'https://github.com/thistechbabe1/kobo',
     liveLink:   'https://kobo-theta-nine.vercel.app/',
-    image:      '/assets/images/kobo.png',
+    image:      '/assets/images/kobo.jpg',
     tags:       ['Next.js', 'React', 'TypeScript'],
   },
   {
@@ -205,7 +205,7 @@ export const projects = [
     description: 'Built a conference platform featuring event schedules, speaker information, digital resources and an administrative portal for managing event content and attendee check-in.',
     githubLink: 'https://github.com/lsbsf-dev/refrshing-website',
     liveLink:   'https://refreshing.website/',
-    image:      '/assets/images/refreshing.png',
+    image:      '/assets/images/refreshing.jpg',
     tags:       ['Next.js', 'React', 'TypeScript', 'Firebase'],
   },
 ];
